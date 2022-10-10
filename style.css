@@ -4,13 +4,16 @@ body {
 
 h1 {
     font-family: georgia;
+    font-size: 50px;
 }
 
 p {
     font-family: georgia;
+    font-size: 30px;
     
 }
 
-a {
-
+ul {
+    font-family: georgia;
+    font-size: 50px;
 }
