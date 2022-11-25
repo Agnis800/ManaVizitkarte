@@ -6,9 +6,9 @@
 </head>
 <body>
 <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact me</a></li>
+    <li><a href="index.php">Home</a></li>
+    <li><a href="about.php">About</a></li>
+    <li><a href="contact.php">Contact me</a></li>
 </ul>
 <h1>Projects</h1>
 <h1></h1>
