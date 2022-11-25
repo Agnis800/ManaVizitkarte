@@ -9,15 +9,15 @@
 <body>
 
 <div class="left">
-  <p><a href="about.html">About</a></p>
+  <p><a href="about.php">About</a></p>
 </div>
   
 <div class="main">
-  <p><a href="projects.html">Projects</a></p>
+  <p><a href="projects.php">Projects</a></p>
 </div>
   
 <div class="right">
-  <p><a href="contact.html">Contact me</a></p>
+  <p><a href="contact.php">Contact me</a></p>
 </div>
 
 <h1>Agnis Vanags</h1>
