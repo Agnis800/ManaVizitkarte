@@ -25,7 +25,7 @@
 <img src="https://thumbs.dreamstime.com/b/modern-computer-programming-code-screen-showing-random-scripts-113805394.jpg" style="max-width:50%;height:auto;" alt="Code">
 
 <footer>
-  <p>Copyright © Agnis Vanags 2022</p>
+  <?php include "footer.php"; ?>
 </footer>
 
 </body>
