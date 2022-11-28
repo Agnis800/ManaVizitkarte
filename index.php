@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale\1.0">
 <link rel="stylesheet" type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="index-style.css">
+<script src="script.js" defer></script>
 <title>Agnis Vanags</title>
 </head>
 <body>
@@ -27,6 +28,12 @@
 <footer>
   <?php include "footer.php"; ?>
 </footer>
+
+<script>
+  //console.log('hello js');
+  //let footer = document.querySelector('footer > div');
+  //console.log(footer);
+</script>
 
 </body>
 </html>
