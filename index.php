@@ -29,6 +29,29 @@
   <?php include "footer.php"; ?>
 </footer>
 
+<?php>
+
+   class mansprojekts {
+     public $projectname = 'manavizitkarte';
+     public $version = '4.0';
+     public $collaborators = ['Agnis', '2'];
+     public $files = 'index.php', 'about.php'
+
+     public function hello()
+
+        echo $this - >projectname . ' - ' . $this-version;
+
+   }
+
+   //šeit ir izvietots objekts
+   $project = new MyProject();
+
+   //šeit ir printesana
+   echo $project - projectname;
+   echo $project - version;
+     
+?>
+
 <script>
   //console.log('hello js');
   //let footer = document.querySelector('footer > div');
