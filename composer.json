@@ -1,0 +1,7 @@
+{
+    "name": "04dpagvanags/mana-vizitkarte",
+    "minimum-stability": "dev",
+    "require": {
+        "phpunit/phpunit": "9.5.x-dev"
+    }
+}
