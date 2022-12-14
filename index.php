@@ -1,4 +1,5 @@
-  <?php
+<?php
+/*
   
   include "vendor/autoload.php";
   
@@ -7,10 +8,8 @@
   $database = new Database();
 
   echo $database->host;
-
-  ?>
-
-
+*/
+?>
 
 <!DOCTYPE html>
 <html>

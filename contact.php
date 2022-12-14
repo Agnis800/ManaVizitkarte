@@ -1,3 +1,6 @@
+<?php
+include "src/Request.php"
+?>
 <!DOCTYPE html>
 <html>
 <head>
