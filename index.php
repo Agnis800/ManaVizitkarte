@@ -1,3 +1,16 @@
+<?php
+/*
+  
+  include "vendor/autoload.php";
+  
+  use App\Database;
+
+  $database = new Database();
+
+  echo $database->host;
+*/
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,19 +42,22 @@
   <?php include "footer.php"; ?>
 </footer>
 
-<?php>
+
+<?php
+/*
 
    class mansprojekts {
      public $projectname = 'manavizitkarte';
      public $version = '4.0';
      public $collaborators = ['Agnis', '2'];
-     public $files = 'index.php', 'about.php'
+     public $files = 'index.php';
 
      public function hello()
 
         echo $this - >projectname . ' - ' . $this-version;
 
-   }
+
+   class
 
    //šeit ir izvietots objekts
    $project = new MyProject();
@@ -49,7 +65,10 @@
    //šeit ir printesana
    echo $project - projectname;
    echo $project - version;
-     
+
+   */
+
+
 ?>
 
 <script>

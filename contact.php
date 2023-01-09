@@ -1,5 +1,6 @@
 <?php
 
+
 define('REQUIRED_FIELD_ERROR', 'This field is required');
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
