@@ -3,6 +3,12 @@
 
 define('REQUIRED_FIELD_ERROR', 'This field is required');
 $errors = [];
+
+$firstname = '';
+$lastname = '';
+$email = '';
+$subject = '';
+$message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      
     //echo '<pre>';
@@ -28,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$email){
        $errors['email'] = REQUIRED_FIELD_ERROR;
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $errors['email'] = "This field must be valid email address";
     }
     
     if (!$subject){
@@ -37,6 +45,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$message){
         $errors['message'] = REQUIRED_FIELD_ERROR;
     }
+
+    // Save to db
+
+    require_once "database.php";
+
+    $connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+
+    // Check connection
+    if (!$connection) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    echo "Connected successfully";
+
+
+    $sql = $connection->prepare("
+    INSERT INTO
+            contact (firstname, lastname, email, subject_text, client_message)
+            VALUES (?, ?, ?, ?, ?)
+        ");
+
+
+
+    $sql->bind_param("sssss", $firstname, $lastname, $email, $subject, $message);
+
+    $sql->execute();
+    $sql->close();
+    echo "New records created succesfully";
 }
 
 function post_data($field)
@@ -45,6 +80,8 @@ function post_data($field)
     
     return htmlspecialchars(stripslashes($_POST[$field]));
 }
+
+
 
 ?>
 
@@ -72,8 +109,8 @@ function post_data($field)
            <div class="col">
              <div class="form-group">
                 <label>First name</label>
-                <input class="form-control <?php echo isset($errors['firstname']) ? 'is-invalid' : ''?>"
-                       name="firstname">
+                <input class="form-control" <?php echo isset($errors['firstname']) ? 'is-invalid' : ''?>"
+                       name="firstname" value="<?php echo $firstname ?>">
                 <div class="invalid-feedback">
                     <?php echo $errors['firstname'] ?? '' ?>
                 </div>
@@ -83,7 +120,7 @@ function post_data($field)
             <div class="form-group">
                 <label>Last name</label>
                 <input class="form-control" <?php echo isset($errors['lastname']) ? 'is-invalid' : ''?>"
-                       name="lastname">
+                       name="lastname" value="<?php echo $lastname ?>">
                 <div class="invalid-feedback">
                     <?php echo $errors['lastname'] ?? '' ?>
                 </div>
@@ -92,7 +129,7 @@ function post_data($field)
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control" <?php echo isset($errors['email']) ? 'is-invalid' : ''?>"
-                       name="email" value="">
+                       name="email" value="<?php echo $email ?>">
                 <div class="invalid-feedback">
                     <?php echo $errors['email'] ?? '' ?>
                 </div>
@@ -102,7 +139,7 @@ function post_data($field)
           <div class="form-group">
                <label>Subject</label>
                <input class="form-control" <?php echo isset($errors['subject']) ? 'is-invalid' : ''?>"
-                       name="subject">
+                       name="subject" value="<?php echo $subject ?>">
                 <div class="invalid-feedback">
                     <?php echo $errors['subject'] ?? '' ?>
                 </div>
@@ -111,7 +148,7 @@ function post_data($field)
           <div class="form-group">
                <label>Message</label>
                <input class="form-control" <?php echo isset($errors['message']) ? 'is-invalid' : ''?>"
-                        id="subject" name="message" style="height:200px">
+                        id="subject" name="message" style="height:200px" value="<?php echo $message ?>">
                 <div class="invalid-feedback">
                     <?php echo $errors['message'] ?? '' ?>
                 </div>
@@ -119,7 +156,8 @@ function post_data($field)
        </div>
 
        <div class="form-group">
-          <button class="btn btn-primary">Submit</button>
+          <input type="submit">
        </div>
 </form>
 </div>
+
