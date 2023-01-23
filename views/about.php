@@ -16,7 +16,7 @@ I play metal music in the bands <strong>Chernobog</strong> and <strong>Strategie
 I offer website programming services. Contact me for more information.</p>
     
 <footer>
-  <?php include "footer.php"; ?>
+  <p>Copyright © Agnis Vanags 2022</p>
 </footer>
 
 </body>

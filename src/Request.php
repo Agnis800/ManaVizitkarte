@@ -1,24 +1,26 @@
 <?php
-print_r($_GET);
-print_r($_POST);
-$method = $_SERVER['REQUEST_METHOD'];
-if ($method == 'POST'){
-    print_r("POST");
-} elseif ($method == 'GET'){
-    print_r("GET");
-} elseif ($method == 'PUT'){
-    print_r("PUT");
-} elseif ($method == 'DELETE'){
-    print_r("DELETE");
-} else {
-    print_r('method unknown');
-}
+
+namespace App;
 
 class Request {
     public $type1 = "get";
     public $type2 = "post";
     public function uri() {
       echo $_SERVER['REQUEST_URI'];
+    }
+    public function getMethod() {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method == 'POST'){
+            return "POST";
+        } elseif ($method == 'GET'){
+            return "GET";
+        } elseif ($method == 'PUT'){
+            return "PUT";
+        } elseif ($method == 'DELETE'){
+            return "DELETE";
+        } else {
+            die('method unknown');
+        }
     }
 }
 ?>

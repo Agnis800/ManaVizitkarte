@@ -1,89 +1,109 @@
 <?php
-/*
-  
-  include "vendor/autoload.php";
-  
-  use App\Database;
 
-  $database = new Database();
+use App\Request;
 
-  echo $database->host;
-*/
-?>
+require_once __DIR__.'/vendor/autoload.php';
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale\1.0">
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" type="text/css" href="index-style.css">
-<script src="script.js" defer></script>
-<title>Agnis Vanags</title>
-</head>
-<body>
-
-<div class="left">
-  <p><a href="about.php">About</a></p>
-</div>
-  
-<div class="main">
-  <p><a href="projects.php">Projects</a></p>
-</div>
-  
-<div class="right">
-  <p><a href="contact.php">Contact me</a></p>
-</div>
-
-<h1>Agnis Vanags</h1>
-<p>Musican, programmer</p>
-<img src="https://thumbs.dreamstime.com/b/modern-computer-programming-code-screen-showing-random-scripts-113805394.jpg" style="max-width:50%;height:auto;" alt="Code">
-
-<footer>
-  <?php include "footer.php"; ?>
-</footer>
+$request = new Request();
 
 
-<?php
-/*
+$routes = [
+    '/' => function() {
+        include 'views/home.php';
+    },
+    '/about' => function() {
+        include 'views/about.php';
+    },
+    '/contact' => function() {
 
-   class mansprojekts {
-     public $projectname = 'manavizitkarte';
-     public $version = '4.0';
-     public $collaborators = ['Agnis', '2'];
-     public $files = 'index.php';
+        if ($request->getMethod() === 'POST') {
 
-     public function hello()
+            //todo implement form logic
 
-        echo $this - >projectname . ' - ' . $this-version;
+            define('REQUIRED_FIELD_ERROR', 'This field is required');
+            $errors = [];
 
-
-   class
-
-   //šeit ir izvietots objekts
-   $project = new MyProject();
-
-   //šeit ir printesana
-   echo $project - projectname;
-   echo $project - version;
-
-   */
+            $firstname = '';
+            $lastname = '';
+            $email = '';
+            $subject = '';
+            $message = '';
 
 
-?>
+            $firstname = post_data('firstname');
+            $lastname = post_data('lastname');
+            $email = post_data('email');
+            $subject = post_data('subject');
+            $message = post_data('message');
 
-<script>
-  //console.log('hello js');
-  //let footer = document.querySelector('footer > div');
-  //console.log(footer);
-</script>
+            if (!$firstname){
+            $errors['firstname'] = REQUIRED_FIELD_ERROR;
+            }
 
-</body>
-</html>
+            if (!$lastname){
+                $errors['lastname'] = REQUIRED_FIELD_ERROR;
+            }
 
-<!---
-  
-<ul>
-  <li><a href="about.html">About</a></li>
-  <li><a href="projects.html">Projects</a></li>
-  <li><a href="contact.html">Contact me</a></li>
-</ul>
+            if (!$email){
+            $errors['email'] = REQUIRED_FIELD_ERROR;
+            } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $errors['email'] = "This field must be valid email address";
+            }
+            
+            if (!$subject){
+                $errors['subject'] = REQUIRED_FIELD_ERROR;
+            }
+
+            if (!$message){
+                $errors['message'] = REQUIRED_FIELD_ERROR;
+            }
+
+            // Save to db
+
+            require_once "db-config.php";
+
+            $connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
+
+            // Check connection
+            if (!$connection) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+
+
+            $sql = $connection->prepare("
+            INSERT INTO
+                    contact (firstname, lastname, email, subject_text, client_message)
+                    VALUES (?, ?, ?, ?, ?)
+                ");
+
+
+
+            $sql->bind_param("sssss", $firstname, $lastname, $email, $subject, $message);
+
+            $sql->execute();
+            $sql->close();
+
+            function post_data($field)
+            {
+                $_POST[$field] ??= false;
+                
+                return htmlspecialchars(stripslashes($_POST[$field]));
+            }
+
+        }
+        // If only HTTP GET Request is happening
+        include 'views/contact.php';
+    },
+    '/projects' => function() {
+        include 'views/projects.php';
+    }
+
+];
+
+$path = $_SERVER['REQUEST_URI'];
+
+if (!empty($routes[$path])) {
+    call_user_func($routes[$path]);
+}
+
+
