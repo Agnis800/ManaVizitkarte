@@ -11,7 +11,8 @@
     <li><a href="contact.php">Contact me</a></li>
 </ul>
 <h1>Projects</h1>
-<h1></h1>
+<ul>
+    <li>Mana Vizītkarte</li>
 
 </body>
 </html>
