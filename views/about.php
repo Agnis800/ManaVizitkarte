@@ -6,9 +6,9 @@
 </head>
 <body>
 <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="projects.php">Projects</a></li>
-    <li><a href="contact.php">Contact me</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/projects">Projects</a></li>
+    <li><a href="/contact">Contact me</a></li>
 </ul>
 <h1>About me</h1>
 <p>I'm a 17-year old musician and programmer from Riga, Latvia. I currently study programming at <em>Riga State Technical school</em>.

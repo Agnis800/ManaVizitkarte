@@ -6,6 +6,13 @@ require_once __DIR__.'/vendor/autoload.php';
 
 $request = new Request();
 
+$userInput = $_SERVER["REQUEST_URI"];
+
+if($userInput == "/contact") {
+    include __DIR__. "/views/contact.php";
+}
+
+
 
 $routes = [
     '/' => function() {
@@ -16,7 +23,7 @@ $routes = [
     },
     '/contact' => function() {
 
-        if ($request->getMethod() === 'POST') {
+        if ($request-> getMethod() === 'POST') {
 
             //todo implement form logic
 
